@@ -2,6 +2,7 @@ package com.example.userapi.controller;
 
 import com.example.userapi.dto.UserDTO;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,5 +30,15 @@ public class UserController {
     @GetMapping
     public List<UserDTO> getUsers() {
         return userList;
+    }
+
+    @GetMapping("/{cpf}")
+    public UserDTO getUser(@PathVariable String cpf) throws Exception {
+
+        for (UserDTO user:userList) {
+            if(user.getCpf().equals(cpf))
+                return user;
+        }
+        return null;
     }
 }
